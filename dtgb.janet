@@ -1,7 +1,13 @@
 (import sh)
 
-(defn- adjust-for-display [date]
-  (-> (fn [[k v]] (if (and (number? v) (index-of k [:month-day :month :year-day :week-day]))
+(defn human-readable
+  ```
+  Given a Janet datetime struct, make those values 1-indexed which are
+  1-indexed in human-readable representations.
+  ```
+  [date]
+  (def one-indexed-keys [:month-day :month :year-day :week-day])
+  (-> (fn [[k v]] (if (and (number? v) (index-of k one-indexed-keys))
                   [k (inc v)]
                   [k v]))
      (mapcat (pairs date))
@@ -26,4 +32,4 @@
   (let [parsed (-> datestr
                   (datestr->epoch)
                   (os/date))]
-    (if for-display? (adjust-for-display parsed) parsed)))
+    (if for-display? (human-readable parsed) parsed)))
