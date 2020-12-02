@@ -18,8 +18,20 @@
   ```
   Given a string representation of a date or datetime, return a number
   representing the UNIX epoch value of that date.
+  
+  (note: this shell out to `date` and should be replaced with a native implementation!)
   ```
-  [datestr] (-> (sh/$< date -d ,datestr "+%s") (string/trim) (parse)))
+  [datestr]
+  (-> (sh/$< date -d ,datestr "+%s") (string/trim) (parse)))
+
+(defn epoch->datestr
+  ```
+  Given a UNIX timestamp, return a string representation of the date.
+
+  (note: this shell out to `date` and should be replaced with a native implementation!)
+  ```
+  [epoch]
+  (-> (sh/$< date -d ,(string "@" epoch)) (string/trim)))
 
 (defn datestr->date
   ```
