@@ -31,7 +31,7 @@
   (note: this shell out to `date` and should be replaced with a native implementation!)
   ```
   [epoch]
-  (-> (sh/$< date -d ,(string "@" epoch)) (string/trim)))
+  (-> (sh/$< date -u -d ,(string "@" epoch)) (string/trim)))
 
 (defn datestr->date
   ```
