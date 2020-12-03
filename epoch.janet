@@ -7,17 +7,15 @@
 (defn- div [x y]
   (math/floor (/ x y)))
 
-(defn- divisible-by [year x] (= 0 (% year x)))
-
 (defn leap-year?
   ```
   Given a year, returns true if the year is a leap year, false otherwise.
   ```
   [year]
-  (let [dy (partial divisible-by year)]
+  (let [dy |(= 0 (% year $))]
     (cond
-      (and (dy 4) (dy 100) (dy 400)) true
-      (and (dy 4) (dy 100)) false
+      (dy 400) true
+      (dy 100) false
       (dy 4) true
       false)))
 
