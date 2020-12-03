@@ -46,7 +46,7 @@
 
 (defn timestamp->date
   ```
-  Given an epoch unix timestamp in seconds, returns a date
+  Given an epoch UNIX timestamp in seconds, returns a date
   structure corresponding to that timestamp, in the same
   format as Janet's `os/date`.
   ```
@@ -64,3 +64,26 @@
      :minutes (div (% dayclock 3600) 60)
      :seconds (% dayclock 60)
      :dst false}))
+
+(defn- year->days [year]
+  (reduce + 0 (map yearsize (range 1970 year))))
+
+(defn- month->days [year month]
+  (reduce + 0 (map |(monthsize year (inc $)) (range month))))
+
+(defn date->timestamp
+  ```
+  Given a Janet date, returns the corresponding UNIX
+  timestamp in seconds.
+  ```
+  [{:year year :month month :month-day day
+    :hours hours :minutes minutes :seconds seconds}]
+  (+ 
+    (* days
+       (+
+        (year->days year)
+        (month->days year month)
+        day))
+    (* 60 60 hours)
+    (* 60 minutes)
+    seconds))

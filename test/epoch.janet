@@ -56,4 +56,24 @@
       :week-day 3
       :dst false})))
 
+(deftest date->epoch
+  (is
+    (=
+     (-> 1606717930 epoch/timestamp->date epoch/date->timestamp)
+     1606717930)))
+
+(deftest date->epoch-zero
+  (is
+    (=
+     (epoch/date->timestamp {:year 1970
+                             :month 0
+                             :month-day 0
+                             :hours 0
+                             :minutes 0
+                             :seconds 0
+                             :dst false
+                             :year-day 0
+                             :week-day 4})
+     0)))
+
 (run-tests!)
