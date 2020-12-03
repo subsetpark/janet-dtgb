@@ -1,15 +1,20 @@
 # Algorithm copied from `gmtime`: https://stackoverflow.com/questions/1692184/converting-epoch-time-to-real-date-time
 
-(def days (* 24 60 60))
-(def months (* 30 days))
-(def years (* 365 days))
+(def- days (* 24 60 60))
+(def- months (* 30 days))
+(def- years (* 365 days))
 
 (defn- div [x y]
   (math/floor (/ x y)))
 
 (defn- divisible-by [year x] (= 0 (% year x)))
 
-(defn leap-year? [year]
+(defn leap-year?
+  ```
+  Given a year, returns true if the year is a leap year,
+  false otherwise.
+  ```
+  [year]
   (let [dy (partial divisible-by year)]
     (cond
       (and (dy 4) (dy 100) (dy 400)) true
@@ -39,7 +44,13 @@
       (dayno->month year (- dayno size) (inc month))
       {:month month :dayno_left dayno})))
 
-(defn timestamp->date [timestamp]
+(defn timestamp->date
+  ```
+  Given an epoch unix timestamp in seconds, returns a date
+  structure corresponding to that timestamp, in the same
+  format as Janet's `os/date`.
+  ```
+  [timestamp]
   (let [dayclock (% timestamp days)
         dayno (div timestamp days)
         {:year year :dayno_left month_dayno_left} (dayno->year dayno 1970)

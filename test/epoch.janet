@@ -1,7 +1,8 @@
 (import testament :prefix "" :exit true)
+(import test/helpers :prefix "")
 
 (import epoch)
-(import test/dtgb)
+(import dtgb)
 
 (deftest leap-year?
   (is (= (epoch/leap-year? 2000) true))
@@ -39,13 +40,20 @@
       :week-day 4})))
 
 (deftest stdlib-struct
-  (dtgb/assert-is-stdlib-struct! (epoch/timestamp->date 0)))
+  (assert-is-stdlib-struct! (epoch/timestamp->date 0)))
 
-# This would be cool I think, but somehow it's off by 1 day?
-# Not sure if my implementation is wrong or something's weird with unit testing current time
-(comment
-  (deftest current-date
-    (let [time (os/time)]
-      (is (= (epoch/timestamp->date time) (os/date))))))
+(deftest from-datestr
+  (is
+    (=
+     (-> "2020-01-01" dtgb/datestr->epoch epoch/timestamp->date)
+     {:year 2020
+      :month 0
+      :month-day 0
+      :year-day 0
+      :minutes 0
+      :hours 8
+      :seconds 0
+      :week-day 3
+      :dst false})))
 
 (run-tests!)
