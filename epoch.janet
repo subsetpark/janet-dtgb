@@ -43,7 +43,7 @@
 
 (defn timestamp->date
   ```
-  Given an epoch UNIX timestamp in seconds, returns a date structure
+  Given an epoch timestamp in seconds, returns a date structure
   corresponding to that timestamp, in the same format as Janet's `os/date`.
   ```
   [timestamp]
@@ -69,7 +69,7 @@
 
 (defn date->timestamp
   ```
-  Given a Janet date, returns the corresponding UNIX timestamp in seconds.
+  Given a Janet date, returns the corresponding epoch timestamp in seconds.
   ```
   [{:year year :month month :month-day day
     :hours hours :minutes minutes :seconds seconds}]
