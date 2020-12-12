@@ -5,4 +5,5 @@
                 "https://github.com/pyrmont/testament"])
 
 (declare-source
- :source ["dtgb.janet"])
+  :source ["dtgb.janet"
+           "epoch.janet"])
