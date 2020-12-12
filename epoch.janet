@@ -19,16 +19,25 @@
       (dy 4) true
       false)))
 
-(defn- yearsize [year]
+(defn days-in-year
+  ```
+  Given a year, returns 366 for leap years and 365 otherwise.
+  ```
+  [year]
   (if (leap-year? year) 366 365))
 
 (defn- dayno->year [dayno year]
-  (let [size (yearsize year)]
+  (let [size (days-in-year year)]
     (if (>= dayno size)
       (dayno->year (- dayno size) (inc year))
       {:year year :dayno_left dayno})))
 
-(defn- monthsize [year m]
+(defn days-in-month
+  ```
+  Given a year and month (starting at 1), returns the numbers of days in that
+  month.
+  ```
+  [year m]
   (cond
     (and (= m 2) (leap-year? year)) 29
     (= m 2)  28
@@ -36,7 +45,7 @@
     31))
 
 (defn- dayno->month [year dayno month]
-  (let [size (monthsize year month)]
+  (let [size (days-in-month year month)]
     (if (>= dayno size)
       (dayno->month year (- dayno size) (inc month))
       {:month month :dayno_left dayno})))
@@ -62,10 +71,10 @@
      :dst false}))
 
 (defn- year->days [year]
-  (reduce + 0 (map yearsize (range 1970 year))))
+  (reduce + 0 (map days-in-year (range 1970 year))))
 
 (defn- month->days [year month]
-  (reduce + 0 (map |(monthsize year (inc $)) (range month))))
+  (reduce + 0 (map |(days-in-month year (inc $)) (range month))))
 
 (defn date->timestamp
   ```
