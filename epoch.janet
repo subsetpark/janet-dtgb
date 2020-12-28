@@ -1,8 +1,13 @@
 # Algorithm copied from `gmtime`: https://stackoverflow.com/questions/1692184/converting-epoch-time-to-real-date-time
 
-(def- days (* 24 60 60))
-(def- months (* 30 days))
-(def- years (* 365 days))
+# TODO: negative timestamps for dates before 1970
+
+(def minutes 60)
+(def hours (* 60 60))
+(def days (* 24 60 60))
+(def weeks (* 7 24 60 60))
+(def months (* 30 days))
+(def years (* 365 days))
 
 (defn- div [x y]
   (math/floor (/ x y)))
