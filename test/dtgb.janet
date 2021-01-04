@@ -4,8 +4,12 @@
 (import ../dtgb)
 (import ../epoch)
 
-(deftest sh-datestr->date
-  (assert-is-stdlib-struct! (dtgb/datestr->date "2020-01-01")))
+(deftest leap-year?
+  (is (= (dtgb/leap-year? 2000) true))
+  (is (= (dtgb/leap-year? 2008) true))
+  (is (= (dtgb/leap-year? 1900) false))
+  (is (= (dtgb/leap-year? 2019) false))
+  (is (= (dtgb/leap-year? 2020) true)))
 
 (deftest human-readable
   (assert-is-stdlib-struct! (dtgb/human-readable (os/date))))
@@ -30,18 +34,18 @@
              (epoch/timestamp->date 10800) :hours)))
 
   (is (= 1 (dtgb/diff
-               (dtgb/datestr->date "2020-01-01")
-               (dtgb/datestr->date "2020-01-08") :weeks)))
+             (dtgb/datestr->date "2020-01-01")
+             (dtgb/datestr->date "2020-01-08") :weeks)))
   (is (= 1 (dtgb/diff
-               (dtgb/datestr->date "2020-01-01")
-               (dtgb/datestr->date "2020-01-10") :weeks)))
+             (dtgb/datestr->date "2020-01-01")
+             (dtgb/datestr->date "2020-01-10") :weeks)))
   (is (= 2 (dtgb/diff
-               (dtgb/datestr->date "2020-01-01")
-               (dtgb/datestr->date "2020-01-14") :weeks)))
+             (dtgb/datestr->date "2020-01-01")
+             (dtgb/datestr->date "2020-01-14") :weeks)))
 
   (is (= 1 (dtgb/diff
-               (dtgb/datestr->date "2020-01-01")
-               (dtgb/datestr->date "2020-01-02") :days)))
+             (dtgb/datestr->date "2020-01-01")
+             (dtgb/datestr->date "2020-01-02") :days)))
   (is (= 365 (dtgb/diff
                (dtgb/datestr->date "2019-01-01")
                (dtgb/datestr->date "2020-01-01") :days)))
@@ -50,18 +54,18 @@
                (dtgb/datestr->date "2021-01-01") :days)))
 
   (is (= 1 (dtgb/diff
-               (dtgb/datestr->date "2020-01-01")
-               (dtgb/datestr->date "2020-02-01") :months)))
+             (dtgb/datestr->date "2020-01-01")
+             (dtgb/datestr->date "2020-02-01") :months)))
   (is (= 13 (dtgb/diff
-               (dtgb/datestr->date "2020-01-01")
-               (dtgb/datestr->date "2021-02-01") :months)))
+              (dtgb/datestr->date "2020-01-01")
+              (dtgb/datestr->date "2021-02-01") :months)))
 
   (is (= 50 (dtgb/diff
-               (dtgb/datestr->date "1970-01-01")
-               (dtgb/datestr->date "2020-01-01") :years)))
+              (dtgb/datestr->date "1970-01-01")
+              (dtgb/datestr->date "2020-01-01") :years)))
   (is (= 1 (dtgb/diff
-               (dtgb/datestr->date "2020-01-01")
-               (dtgb/datestr->date "2021-01-01") :years)))
+             (dtgb/datestr->date "2020-01-01")
+             (dtgb/datestr->date "2021-01-01") :years)))
 
   (assert-thrown (dtgb/diff
                    (dtgb/datestr->date "2020-01-01")
