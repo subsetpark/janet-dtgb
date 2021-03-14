@@ -70,4 +70,18 @@
                               :week-day 4})
       0)))
 
+(deftest date->epoch-pre-1970
+  (is
+    (=
+      (epoch/date->timestamp {:year 1950
+                              :month 0
+                              :month-day 0
+                              :hours 0
+                              :minutes 0
+                              :seconds 0
+                              :dst false
+                              :year-day 0
+                              :week-day 4})
+      -631152000)))
+
 (run-tests!)
