@@ -20,17 +20,39 @@
 (defn- div [x y]
   (math/floor (/ x y)))
 
-(defn- dayno->year [dayno year]
+(defn- dayno->year+ [dayno year]
   (let [size (util/days-in-year year)]
     (if (>= dayno size)
-      (dayno->year (- dayno size) (inc year))
+      (dayno->year+ (- dayno size) (inc year))
       {:year year :dayno_left dayno})))
 
-(defn- dayno->month [year dayno month]
+(defn- dayno->year- [dayno year]
+  (let [size (util/days-in-year year)]
+    (if (>= dayno size)
+      (dayno->year- (- dayno size) (dec year))
+      {:year year :dayno_left dayno})))
+
+(defn- dayno->year [dayno year]
+  (if (< dayno 0)
+    (dayno->year- (- dayno) year)
+    (dayno->year+ dayno year)))
+
+(defn- dayno->month+ [year dayno month]
   (let [size (util/days-in-month year month)]
     (if (>= dayno size)
-      (dayno->month year (- dayno size) (inc month))
+      (dayno->month+ year (- dayno size) (inc month))
       {:month month :dayno_left dayno})))
+
+(defn- dayno->month- [year dayno month]
+  (let [size (util/days-in-month year month)]
+    (if (>= dayno size)
+      (dayno->month- year (- dayno size) (dec month))
+      {:month month :dayno_left dayno})))
+
+(defn- dayno->month [year dayno month]
+  (if (< dayno 0)
+    (dayno->month- year (- dayno) month)
+    (dayno->month+ year dayno month)))
 
 (defn timestamp->date
   ```

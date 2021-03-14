@@ -19,6 +19,20 @@
        :year-day 334
        :week-day 1})))
 
+(deftest timestamp->date-negative-timestamp
+  (is
+    (=
+     (epoch/timestamp->date -631152000)
+     {:year 1950
+      :month 0
+      :month-day 0
+      :hours 0
+      :minutes 0
+      :seconds 0
+      :dst false
+      :year-day 0
+      :week-day 0})))
+
 (deftest zero-date
   (is
     (=
@@ -81,7 +95,7 @@
                               :seconds 0
                               :dst false
                               :year-day 0
-                              :week-day 4})
+                              :week-day 0})
       -631152000)))
 
 (run-tests!)
