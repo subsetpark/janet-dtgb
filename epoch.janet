@@ -10,8 +10,6 @@
 # Algorithm copied from `gmtime`:
 # https://stackoverflow.com/questions/1692184/converting-epoch-time-to-real-date-time
 
-# TODO: negative timestamps for dates before 1970
-
 (def minutes 60)
 (def hours (* 60 60))
 (def days (* 24 60 60))
@@ -55,7 +53,9 @@
      :dst false}))
 
 (defn- year->days [year]
-  (reduce + 0 (map util/days-in-year (range 1970 year))))
+  (if (< year 1970)
+    (reduce - 0 (map util/days-in-year (range year 1970)))
+    (reduce + 0 (map util/days-in-year (range 1970 year)))))
 
 (defn- month->days [year month]
   (reduce + 0 (map |(util/days-in-month year (inc $)) (range month))))

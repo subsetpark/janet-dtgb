@@ -1,5 +1,6 @@
 (import testament :prefix "" :exit true)
-(import test/helpers :prefix "")
+
+(import ./helpers :prefix "")
 
 (import ../unix)
 

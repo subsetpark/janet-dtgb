@@ -1,6 +1,6 @@
 (import sh)
 
-(import util)
+(import ./util)
 
 (defn datestr->epoch
   ```
