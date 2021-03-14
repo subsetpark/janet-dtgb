@@ -1,8 +1,9 @@
 (import testament :prefix "" :exit true)
-(import test/helpers :prefix "")
 
-(import epoch)
-(import dtgb)
+(import ./helpers :prefix "")
+
+(import ../epoch)
+(import ../dtgb)
 
 (deftest timestamp->date
   (is
