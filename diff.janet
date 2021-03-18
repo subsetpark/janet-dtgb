@@ -13,7 +13,7 @@
   [date1 date2 &opt unit]
   (default unit :seconds)
   (let [sec-diff (- (epoch/date->timestamp date2) (epoch/date->timestamp date1))]
-    (math/round
+    (math/ceil
       (/ sec-diff
          (case unit
            :seconds 1
