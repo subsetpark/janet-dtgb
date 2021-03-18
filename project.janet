@@ -5,7 +5,8 @@
                  "https://github.com/pyrmont/testament"])
 
 (declare-source
-  :source ["dtgb.janet"
+  :source ["diff.janet"
+           "dtgb.janet"
            "epoch.janet"
            "unix.janet"
            "util.janet"])
