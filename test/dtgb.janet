@@ -37,7 +37,7 @@
   (is (= 1 (dtgb/diff
              (dtgb/datestr->date "2020-01-01")
              (dtgb/datestr->date "2020-01-08") :weeks)))
-  (is (= 1 (dtgb/diff
+  (is (= 2 (dtgb/diff
              (dtgb/datestr->date "2020-01-01")
              (dtgb/datestr->date "2020-01-10") :weeks)))
   (is (= 2 (dtgb/diff
