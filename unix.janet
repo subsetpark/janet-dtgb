@@ -7,7 +7,7 @@
   Given a string representation of a date or datetime, return a number
   representing the UNIX epoch value of that date.
   
-  (note: this shell out to `date` and should be replaced with a native implementation!)
+  (note: this shells out to `date` and should be replaced with a native implementation!)
   ```
   [datestr]
   (-> (sh/$< date -d ,datestr "+%s") (string/trim) (parse)))
