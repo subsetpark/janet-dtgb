@@ -24,4 +24,4 @@
 (deftest human-readable
   (assert-is-stdlib-struct! (dtgb/human-readable (os/date))))
 
-(run-tests! :exit-on-fail false)
+(run-tests!)

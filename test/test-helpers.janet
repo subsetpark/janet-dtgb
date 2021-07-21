@@ -1,7 +1,7 @@
 (import testament :prefix "" :exit true)
 
 # Allow redefining tests with the same names for running tests in the REPL
-(setdyn :testament-allow-redefining-tests true)
+(setdyn :testament-repl-mode true)
 
 (defn assert-is-stdlib-struct!
   ```
