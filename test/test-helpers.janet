@@ -1,5 +1,8 @@
 (import testament :prefix "" :exit true)
 
+# Allow redefining tests with the same names for running tests in the REPL
+(setdyn :testament-allow-redefining-tests true)
+
 (defn assert-is-stdlib-struct!
   ```
   Assert that the given object has the same fields, with the same
