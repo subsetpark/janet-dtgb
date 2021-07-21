@@ -1,6 +1,6 @@
 (import testament :prefix "" :exit true)
 
-(import ./helpers :prefix "")
+(import ./test-helpers :prefix "")
 
 (import ../epoch)
 (import ../dtgb)
